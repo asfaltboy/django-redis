@@ -1,6 +1,8 @@
+from typing import Dict
+
 from django.conf import settings
 from django.utils.module_loading import import_string
-from redis.connection import DefaultParser
+from redis.connection import ConnectionPool, DefaultParser
 
 
 class ConnectionFactory:
@@ -11,7 +13,7 @@ class ConnectionFactory:
     # ConnectionFactory is instiated, as Django creates new cache client
     # (DefaultClient) instance for every request.
 
-    _pools = {}
+    _pools: Dict[str, ConnectionPool] = {}
 
     def __init__(self, options):
         pool_cls_path = options.get(

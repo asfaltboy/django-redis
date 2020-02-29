@@ -1,9 +1,10 @@
 import bisect
 import hashlib
+from typing import List
 
 
 class HashRing:
-    nodes = []
+    nodes: List = []
 
     def __init__(self, nodes=(), replicas=128):
         self.replicas = replicas
